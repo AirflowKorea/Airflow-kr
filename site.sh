@@ -197,7 +197,6 @@ function build_site {
             stable_version="$(cat "docs-archive-stable/${package_name}/stable.txt")"
             verbose_copy "docs-archive-stable/${package_name}/${stable_version}/." "dist/docs/${package_name}/stable"
             create_redirect "dist/docs/${package_name}/index.html" "/docs/${package_name}/stable/index.html"
-            log "can do"
         else
             verbose_copy "docs-archive-stable/${package_name}/." "dist/docs/${package_name}/"
         fi
@@ -209,6 +208,8 @@ function build_site {
     # but when building a full site, it's worth regenerate
     log "Preparing packages-metadata.json"
     "${MY_DIR}"/dump-docs-packages-metadata.py > "${MY_DIR}/dist/_gen/packages-metadata.json"
+
+    verbose_copy "dist/." "landing-pages/dist/"
 
     # Sanity checks
     assert_file_exists "${MY_DIR}"/dist/docs/index.html
