@@ -9,7 +9,7 @@ import semver
 
 
 ROOT_DIR = os.path.dirname(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
-APACHE_AIRFLOW_ARCHIVE = os.path.join(ROOT_DIR, "docs")
+APACHE_AIRFLOW_ARCHIVE = os.path.join(ROOT_DIR, "docs-archive-stable")
 
 
 def get_all_versions(directory: str) -> List[str]:

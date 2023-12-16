@@ -179,7 +179,7 @@ function build_site {
     mkdir -p dist
     rm -rf dist/*
     verbose_copy landing-pages/dist/. dist/
-    for pkg_path in docs/*/ ; do
+    for pkg_path in docs-archive-stable/*/ ; do
         # Process directories only,
         if [ ! -d "${pkg_path}" ]; then
             continue;
@@ -189,16 +189,17 @@ function build_site {
 
         # Is this documentation versioned?
         if [ -f "${pkg_path}/stable.txt" ]; then
-            mkdir -p "docs/${package_name}"
-            for ver_path in "docs/${package_name}"/*/ ; do
+            mkdir -p "docs-archive-stable/${package_name}"
+            for ver_path in "docs-archive-stable/${package_name}"/*/ ; do
                 version="$(basename -- "${ver_path}")"
-                verbose_copy "docs/${package_name}/${version}/." "dist/docs/${package_name}/${version}"
+                verbose_copy "docs-archive-stable/${package_name}/${version}/." "dist/docs/${package_name}/${version}"
             done
-            stable_version="$(cat "docs/${package_name}/stable.txt")"
-            verbose_copy "docs/${package_name}/${stable_version}/." "dist/docs/${package_name}/stable"
+            stable_version="$(cat "docs-archive-stable/${package_name}/stable.txt")"
+            verbose_copy "docs-archive-stable/${package_name}/${stable_version}/." "dist/docs/${package_name}/stable"
             create_redirect "dist/docs/${package_name}/index.html" "/docs/${package_name}/stable/index.html"
+            log "can do"
         else
-            verbose_copy "docs/${package_name}/." "dist/docs/${package_name}/"
+            verbose_copy "docs-archive-stable/${package_name}/." "dist/docs/${package_name}/"
         fi
     done
 
@@ -213,7 +214,7 @@ function build_site {
     assert_file_exists "${MY_DIR}"/dist/docs/index.html
     assert_file_exists "${MY_DIR}"/dist/docs/apache-airflow/index.html
     # assert_file_exists "${MY_DIR}"/dist/docs/apache-airflow/1.10.7/tutorial.html
-    # assert_file_exists "${MY_DIR}"/dist/docs/apache-airflow/stable/tutorial.html
+    assert_file_exists "${MY_DIR}"/dist/docs/apache-airflow/stable/tutorial.html
     assert_file_exists "${MY_DIR}"/dist/_gen/packages-metadata.json
 }
 

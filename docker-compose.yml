@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  airflowkr:
+    container_name: "airflowkr"
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+
+    networks:
+      - local-net
+
+networks:
+  local-net:
+    driver: bridge

@@ -27,9 +27,6 @@ RUN apt-get clean
 RUN apt-get update
 RUN apt-get -f install
 RUN apt install hugo -y
-# RUN nvm install 16
-# RUN nvm use 16
-# RUN npm install -g yarn
 
 WORKDIR /app
 
@@ -39,6 +36,6 @@ RUN chmod +x site.sh dump-docs-packages-metadata.py
 RUN . "$HOME/.nvm/nvm.sh" && ./site.sh check-site-links && ./site.sh build-site 
 #&& ./site.sh preview-landing-pages
 
-CMD ["/bin/sh", "-c", ". \"$HOME/.nvm/nvm.sh\" && ./site.sh preview-landing-pages"]
-
+CMD ["/bin/sh", "-c", ". \"$HOME/.nvm/nvm.sh\" && chmod +x site.sh dump-docs-packages-metadata.py && ./site.sh preview-landing-pages"]
+# CMD ["/bin/bash"]
 EXPOSE 3000
